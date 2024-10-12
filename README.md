@@ -1,6 +1,5 @@
 # Fitness Equipment and Accessories
 
-### Live URL: https://assignment-4-ruddy-one.vercel.app/
 
 ### Technology used
 
@@ -24,7 +23,7 @@
 1. First clone this repository on your device with this command line:
 
 ```
-git clone https://github.com/shiningsudipto/fitness-tools-server
+
 ```
 
 2. After cloning the repository install all necessary packages with:

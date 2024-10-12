@@ -3,36 +3,46 @@ import sendResponse from '../../utils/sendResponse'
 import httpStatus from 'http-status'
 import { productServices } from './product.service'
 import { Product } from './product.model'
+ import{ ProductFilters } from './product.controller';
 
-const createProduct = catchAsync(async (req, res) => {
-  const productData = req.body
-  const result = await productServices.createProductIntoDb(productData)
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Product created successfully',
-    data: result,
+
+
+const createProduct=catchAsync(async(req,res)=>{
+  const productData=req.body
+  const result=await productServices.createProductIntoDb(productData)
+  sendResponse(res,{
+    statusCode:httpStatus.OK,
+    success:true,
+    message:'Product created successfully',
+    data:result,
   })
 })
 
-export interface ProductFilters {
-  searchTerm?: string
-  categories?: string[]
-  sortByPrice?: 'asc' | 'desc'
-  price?: number
-}
 
+
+export interface ProductFilters{
+  searchTerm?:string
+  categories?:string[]
+  sortByPrice?:'asc'|'desc'
+  price?:number
+}
 const getAllProduct = catchAsync(async (req, res) => {
   const { searchTerm, categories, sortByPrice, price } = req.query as Partial<
     Record<keyof ProductFilters, string>
   >
 
   // eslint-disable-next-line prefer-const
-  let filters: ProductFilters = {
+  // let filters: ProductFilters = {
+  //   searchTerm,
+  //   categories: categories ? categories.split(',') : [],
+  //   sortByPrice: undefined,
+  //   price: price ? parseFloat(price) : undefined,
+  // }
+  let filters:ProductFilters={
     searchTerm,
-    categories: categories ? categories.split(',') : [],
-    sortByPrice: undefined,
-    price: price ? parseFloat(price) : undefined,
+    categories:categories? categories.split(','):[],
+    sortByPrice:undefined,
+    price:price?paraseFloat(price):undefined
   }
 
   if (sortByPrice === 'asc' || sortByPrice === 'desc') {
